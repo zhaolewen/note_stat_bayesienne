@@ -1,3 +1,3 @@
 \contentsline {chapter}{\numberline {1}Introduction}{5}
-\contentsline {chapter}{\numberline {2}Inference Bayesienne}{7}
-\contentsline {section}{\numberline {2.1}Inference statistiqye et theorie de la decision}{7}
+\contentsline {chapter}{\numberline {2}Inference Bay\'esienne}{7}
+\contentsline {section}{\numberline {2.1}Inference statistique et th\'eorie de la d\'ecision}{7}

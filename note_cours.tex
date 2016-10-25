@@ -1,5 +1,11 @@
 \documentclass{book}
-\title{Statistique Bayesienne}
+\linespread{1.5}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+
+\title{Statistique Bay\'esienne}
 
 
 \begin{document}
@@ -7,8 +13,8 @@
 
 \tableofcontents
 \chapter{Introduction}
-\chapter{Inference Bayesienne}
-\section{Inference statistiqye et theorie de la decision}
+\chapter{Inference Bay\'esienne}
+\section{Inference statistique et th\'eorie de la d\'ecision}
 def: Modele statistique
 
 \begin{equation}
@@ -17,7 +23,7 @@ u = (Y,F,P)
 	
 Si P est (?) de loi a (?), les (?) 
 
-P_theta
+$P_\theta$
 pt de depend de l'inference statistique:
 ou cherche a "(?)" la valeur d'une (?)
 
@@ -26,5 +32,39 @@ g(theta)\ in Z est (?) le concept d'(?)
 def: un estimateur ou regle de decision, thtre facteurs (?)
 delta: Y->Z
 
+On veut construire $delta$ de sorte que ayant observe "$Y=y$", $\delta (y)$ sait une "(?)" approximative de $g(\theta)$
+
+def: On appelle fonction de perte, une fonction 
+
+\begin{equation}
+	L: P\times -> \mathbb{R}_+
+\end{equation}
+ou
+\begin{equation}
+	L:\Theta\times Z -> \mathbb{R}_+
+\end{equation}
+
+dans le cas d'une famille paramétrique.
+
+et telle que
+
+i) $\forall \theta \in \Theta$
+$L(\theta,g(\theta)) = 0$
+
+ii)si l'absence $Y=y$ et que l'on (?) le regle de decision $\delta$, alors la quantite $L(\theta,\delta(y))$ represente le coeur associe a la decision
+$S(y)$ pour la loi $P_\theta \in \mathscr{P}$
+
+Archetype de fonction de perte: perte quadratique
+\begin{equation}
+	L(\theta, \delta(y)) = (g(\theta) - s(y))^2
+\end{equation}
+
+- autre fonctions de pertes:
+
+value absolue $C^1$, pertes 0-1 (tests d'hypothese)
+
+(?) pertes joules ou l'entropie
+
+(?) en euros
 
 \end{document}
