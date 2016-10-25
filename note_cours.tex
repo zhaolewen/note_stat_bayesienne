@@ -362,7 +362,7 @@ VT: Variation Totale
 \section{Algorithme MCMC (MH)}
 \subsection{Convergence de MH}
 Rappel:
-Def: Etant donn\`e une loi instrumentale $q$, 
+Def: Etant donn\'e une loi instrumentale $q$, 
 i)generer un $i_k~q(y|x_k)$
 ii) poser
 
@@ -387,15 +387,153 @@ avec
 \end{equation}
 
 
+(graph here)
 
 
+\begin{equation}
+K_1(x, d(y,y')) = \delta_x(dy)q(y'|x)dy'
+\end{equation}
+
+\begin{equation}
+K_2((y,y'),dz) =\delta_y(dy)(1-\rou(y,y'))\phi(y,y')\delta_y(dy)
+\end{equation}
 
 
+\begin{equation}
+K_{MH}(x,A)=K_1K_2()
+\end{equation}
+
+(?)
+il suffit de'etablir que $K_{MH}$ est p-irreversible
+
+on doit avoir
+
+\begin{equation}
+\int_B \p(x)dxK_{MH}(x,A) = 
+\end{equation}
+
+le rapport d'acceptation $\rou(x,y)$ est construit tel que 
+
+\begin{equation}
+\rou(x,y)q(y|x)p(x) = \rou(y,x)\phi(x|y)p(y)dxq(y|x)\rou(x,y)dy
+\end{equation}
+
+1er terme du noyeau
+
+\begin{equation}
+\int_{x\in A} \int_{y\in B} p(x)
+\end{equation}
+
+verifier egalement que le second terme est reversible. Donc $K_{MH}$ est p-irreversible 
+
+=> p est une densite invariante
+
+proposition:  s'il existe $\epsilon,\alpha > 0$ telk que $|x-y|<\alpha$
+=>$q(y|x)>\epsilon$, alors, la chaine $(X_n)$ produite par l'algorithmne MR est p-invariante et a-periodique
+
+NB: la propriete sur q est facile a obtenir.
+
+(?)
+
+pour tout ensemble A mesurable 
+
+et toute valeur $x_0 \in E$, il existe un entier $m$ et une suite $B_k$ de boule de E tel que $x_0\in B_0, N_m \in A$ et $\forall y \in B_{k+1}$ et $\forall x \in B_k$, on a $|x-y|<\alpha$.
+
+Par suite, la probabilite que $P(X_m\in A| X_0 = x_0)>0$
+
+ii) aperiodicite
+
+A chaque instant, al probabilite de rester aussi pr\`es que lon veux d'un point courant $x\in E$ est non nulle. Donc il ne peut pas avoir de comportement aperiodique. 
+
+Conclusion: La chaine de MH converge en norme VT vers la densite cible $p$(densite invariante).
 
 
+\subsection{Utilisation de MH en pratique}
+\subsubsection{deux versions de MH}
+
+1. MH independante(IMH)
+Choisit une densite ionstrumentale $q(y|x)$ qui ne depend pas de $x$.
 
 
+\begin{equation}
+\phi(x,y)=min\{1, \frac{p(y)}{p(x)}\frac{q(x)}{q(y)}\}
 
+Linearalise l'algorithme de AR avec l'avantage de ne pas devoir (?) M tel que $Mq > p$
+\end{equation}
+
+Remarque: les echantillons $(X_n)$ ne sont pas independants.
+
+On peut rester dans le meme etape.
+
+2. MH \`a marche aleatoire (RWMH, Random Walk MH)
+
+Dans ce cas, $q(y|x)$ est de la forme $g(y-x)$ ou $g$ est une densite.
+
+=> $(X_n)$ est une marche aleatoire au sens ou on simule des $y_k=x_k+\epsilon_k$ avec $\epsilon ~ g$. 
+Des que $g>0$ au voisinage de 0, les resultat de convergence s'applique.
+
+Generalement, on prend $g$ symmetrique tel que $g(x) = g(-x)$, par exemple densite gausienne centr\'ee au 0.
+
+Dans ce cas,
+\begin{equation}
+\rou(x,y)=min{1,\frac{p(y)}{p(x)}}
+\end{equation}
+
+-> des echantillons genere sont potentiellement tres correlees, contrairement aux cas precedents.
+
+Probleme des transition avec des petits pas:
+Convergence de la chaine ?
+
+\subsbusection{Strategie de convergence d'une chaine de Markov}
+
+1. IMH:
+
+-> bien explorer le support de P
+le rapport d'accpetation le plus grande possible.
+
+Comme dans le cas de l'acceptation rejet, il faut choisir $q$ proche de $p$.
+
+Si les densites sont tres differentes, le rapport d'AR sera faible.
+
+-> Idee: On choisit $q$ dans une famille parametr\'e $\{q^{\theta}\}$ et on fait "tourner" la chaine ("run").
+
+On calcule un taux d'acceptation moyen $\bar{p(\theta)}$ et on utilise un algorithme d'optimisation pour avoir $\bar{p}(\theta)$ le plus grand possible.
+
+2. RWMH
+
+(graph ici)
+
+1. Choisi $\sigma_q<\sigma_p$
+car si c'est ne pas le cas, on genere des points en dehors du support de $p$.
+et ces points seront rejetes puisque $\frac{p(y)}{p(x)} << 1$. Et cette chaine reste au meme endroit.
+
+Il faut par ailleurs que la chaine suit suffisamment longue pour explorer le support de $p$.
+
+- Si l'on fait $N$ pas de taille $\sigma_\alpha$, la chaine se deplace de $sqrt(N)\sigma_q$.
+
+Pour aller d'un bout a l'autre du support de $p$, il faut environ $N=(\sigma_p^{max}\sigma_q)^2$ pas.
+
+De la meme facon que dans IMH, on a interet a optimiser $\rou$ pour qu'il ne soit pas trop petite. Sinon, on passe le temps a rajouter les echantillons et la chaine ne se deplace pas.
+
+Mais a l'inverse de IMH, $\rou$ ne doit pas etre trop grand car sinon c'est probablement que l'on fait des pas trop petits.
+
+Regle empirique(fonde sur des etudes theorique ou l'on est capable de preciser la vitesse de convergence )
+$\phi \approx \frac{1}{2}$ou  petite dimension
+$\phi \approx 1/4 grande dimension$
+
+adapter $q$ pour obtenir les $\phi$ (?)
+
+\subsubsection{Quelque principes de convergence}
+
+1er principe: diagonstic visuel
+
+1.grand excursion: pas de melange
+2. melange mais pas suffisant
+3. chaine melangeante
+
+
+2e principe:multiple (les chaines en parallel)
+idee: generer plusieurs chaines en parallel $p(x)$ a partir de points initiaux differents et comparer les distribution empirique.
 
 
 
