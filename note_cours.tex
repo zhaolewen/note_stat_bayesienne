@@ -95,4 +95,311 @@ Cas particulier important
 
 -> recherche une estimateur avec minimiseur ou maximiseur d'un critere
 
+
+\section{Algorithme de (?)}
+
+MM a 
+
+en utilisant une densite $q(x|x_1)$ appele 
+-densite instrumentale
+-densite de condition
+-densite proproditionlelle
+
+-> doit etre facile a simuler
+->peut etre tres differente de p (la cible)
+
+(graph ici)
+
+exemple gaussien centre sur $x_i$
+
+MH:
+
+al'iterition i $(x_1, .. ,x_n)$ a deja ete 
+1) generer y_i ~ q(. | x_i)
+2) calcule le rapport d'accpetation 
+\begin{equation}
+
+a=\frac{P(y_i)}{P(x_i)}\frac{q(x_i|y_i)}{q(y_i|x_i)}
+
+\end{equation}
+
+3) si a >= 1
+
+prendre x_{i+1} = y_i
+
+sinon
+
+\{
+x_i+1=y_i avec (?)
+x_i+1=x_i
+
+
+remarque
+1) (?)
+2) si q est symmetrique
+$q(x|y) = q(y|x)$
+alor $a=\frac{p(y)}{p(x)}$
+->tendence a se diriger dans les zones de densite p eleve
+
+(graph ici)
+
+l'algorithme de MR est un procede d'exploration de l'espace e
+-> l'analyse de cet alfgorithem repose sur la theorie de chaine de Markov
+
+-> culture
+->analyse MH
+
+
+\subsection{Element de theorie des chaines de Markov}
+\subsubsection{}
+
+def Soit(E,\eplsion) un espace mesurable. Une (?) sur E
+
+une famille de probabilite
+
+\begin{equation}
+
+\{K(x,.)_{x\in E}
+\end{equation}
+
+indexe par les points de E.
+
+Pout tout ensemble mesurable $\forall \lambda \in \E$
+
+l'application x-> $K(x,A)$ est mesurable.
+
+$\forall x \in E, \forall A\in \Sigma$
+
+$K(\sigma, A)$ represente une probabilite de x (?) dans A a partir de x
+
+Etant donne un noyeau K et une probabilite $\mu$ sur $E$, on definit une nouvelle probabilite $\mu K$ par $\forall A \in E$
+\begin{equation}
+
+\mu K(A) = \int_E \mu (dx) K(x,A)
+\end{equation}
+
+NB: 
+\begin{equation}
+E(x) = \int x dP_x(x) = \int P_x(dx)
+\end{equation}
+
+En particulier, si $mu$ admet une densite $g$
+
+\begin{equation}
+\mu K(A) = \int_E K(x,A) g(x) dx
+\end{equation}
+
+Composition de noyeau
+
+def: soit $K_1$ et $K_2$ deux noyeaux, on definit le  noyeau
+
+$K_1 K_@$ pour $\forall (x,A)\in (E,\Epsilon)$
+
+\begin{equation}
+(K_1 K_2)(x,A) = ((K_1,.)K_2)(A)=\int_E K_1(x,dy)K_2(y,A)
+\end{equation}
+
+Si $K1$ a une densite k_1
+
+\begin{equation}
+=\int_E k_1(x,y)K_2(y,A)dy
+\end{equation}
+
+- $K_1K_2(x,A)$ 
+- en faisant une 1ere $K_1$ et (?)
+
+OIn definit par recurrence les noyeaux itere
+
+$\forall x > 1, \forall (x,A) \in E \times \Sigma$
+
+
+\begin{equation}
+K^n(x,A) =\int_E K^{n-1}(x,dy)K(y,A)
+\end{equation}
+
+avec $K^0(X,A)= \mathbb{1}_A(x)=\delta_x(A)$
+
+\subsubsection{Chaine de Markov}
+
+def: Soit $(\Omega, A,P)$ une (?)
+Une suite $(X_n)_n\in \mathbb{N}$ (?)
+
+est une chaine de Markov s'il existe une suite de noyaux $(K_n)_{n\in \mathbb{N}}*$ (?)
+
+$\forall n,A_0,A_1, ... ,A_n \in \Epsilon$
+
+$P(x_0 \in A_0, ... x_n \in A_n)=\int_{x_0\in A_0} ... \int_{x_n \in }A_n \mu(d x_0)K_1(x_0,dx1) .. K_n(X_{n-1},dx_n)$
+ou $\mu$ est la loi de $X_0$ applique la (?) de la chaine
+
+-> On a deduit que la loi $P_{x_{n+1}}$ est la loi de $P_{x_n}K_{n+1}$
+
+Si E est discret, (E est fini ou denombrable)
+On utilise la definition suivante
+
+def: $x_n$ est une chaine de Markov sur une chaine discret si 
+
+\begin{equation}
+P(X_{x=x_0},...,X_{x=x_n})=P(X=x_0)K_1(x_0, x_1),..., K_n(x_{n-1},x_n)
+\end{equation}
+
+$\forall x_0,...,x_n \in E$
+on a (?)
+
+\begin{equation}
+P(X_n=x_n|X_1=x_1,...,X_{n-1}=x_{n-1})=K(x_{n-1,x_n})
+\end{equation}
+
+la loi conditionnelle de $X_n$ connaissance l'histoire du processus ne depende que de $X_{n-1}$
+
+def:Lorsque $K_n$ ne depend pas de $n$ -> La chaine ($x_n$) est dit homogene(synome de stationnaire)
+
+\subsection{Prpbabilite invariante}
+
+->Regarder la notion de convergence de la chaine de Markov
+
+def: Si $(X_n)$ est une chaine de Markov homog\`ene, alors la limite $\Pi \in M_1^+(E)$ du systeme dynamique definit par 
+$P_{x_n}=P_{x_{n-1}}K$  si elle (?) est un poiunt fixe de la transformation lineaire
+
+\begin{equation}
+\Pi \in (?) -> \Pi K
+\end{equation}
+
+c'est a dire, $\forall A \in \epsilon$
+
+\begin{equation}
+\Pi(A)=\int \P_i(dx)K(x,A)
+\end{equation}
+
+une telle probatilite $\Pi$ est appele (?) invariante (?) de $(X_n)$
+
+Objectif:Etudier le comportement asymptotique de $P_{x_n}$
+
+- Condition suffisante qui garantit que une loi $\Pi$ est invariante.
+
+def: Une chaine de Markov de noyau $K$ est $\Pi$-reversible si $\forall A,B \in \Epsilon$
+
+\begin{equation}
+\int_B K(x,A)\Pi(dx) = \int_A K(x,B)\Pi(dx)
+\end{equation}
+(Probabilite de B-> A = Probabilite de A->B)
+
+Remarque Si $E$ est (?)
+$\forall x,y \in E$
+
+\begin{equation}
+\Pi(x)K(x,y)=\Pi(y)K(y,x)
+\end{equation}
+On dit ainsi que $\Pi$ est reversible.
+
+Proposition: Si $\Pi$ est reversible, alors cette $\Pi$ est invariante.
+
+demonstration:
+
+Si $B=E, \foprall A \in \Sigma$
+
+\begin{equation}
+\int_A K(x,E)\Pi(dx)=\Pi(A)=\int_E K(x,A)\Pi(dx)
+\end{equation}
+
+Les noyeau des algorithmes MCMC et en particulier celui de l'algorithme de MH sont quasiment toujours construits de maniere a verifier la reversibilite pour la densite cible $P$.
+
+Etape suivante: etudier la convergence d'une chaine de Markov vers une loi invariante.
+
+\subsection{Propriete de convergence}
+
+1ere idee: pour qu'une chaine converge, il faut assurer que l'on peut atteindre "n'importe" etape partant d'une condition initiale quelquconque.
+
+def: le temps d'entree (liting time) $\tau_A$ d'une chaine $(X_n),n\in \mathbb{n}$ dans $A\in \Sigma$ est defini par
+
+$\tau_A= of n>=1, X_n\inA$
+
+def: une chaine de Markov est dite phi-inreductible pour une probilite $\phi$ si $\forall x \in E, \forall A\in \Sigma$, on a
+
+\begin{equation}
+\phi(A)>0 => P(P(\tau_A<\inf|X_0=x)) >0
+\end{equation}
+
+signifie que tout ensemble de $\phi_n$ probabilite non nulle peut etre atteindre a partie de n'importe quelle valeur initiale de $X_0$.     
+
+Theoreme: Soit ($X_n$) une chaine de Markov $\Pi$-inreductible et $\Pi$-invariante (?)
+
+
+\begin{equation}
+\int_E |\tau(x)|\Pi(dx)<-\inf
+\end{equation}
+
+alors pour presque tout points initiale $x_0\in E$
+
+
+\begin{equation}
+\hat{\phi_n}=\frac{1}{n}\sum_{i=1}^{n}\phi(X_n) converge p.s. \Phi=\int \phi(x)\Pi(dx)
+\end{equation}
+
+-> Loi forte de grande nombre pour une chaine de Markov.
+
+On peut obtenir des resultats plus forts en "eliminant" les comportement deterministes d'une chaine de Markov.
+
+Def: aperidocite
+
+Une chaine de Markov $(X_n)$ $\phi$-irreductible est aperidodique s'il n'existe pas de partition de E de la forme $(E_1,...,E_n,N)$
+
+avec $Nlog\phi(N)=0$ et $E_1,...,E_n$tel que
+
+\begin{equation}
+\forall n>0 P(X_{n+1}\in E_{n+1}|X_n\in E_n) = 1
+\end{equation}
+
+-> pas des contraintes deterministe.
+
+Theoreme: Soit une chaine de Markov de noyeau de transition $K$, $\Pi$-irreductible, $\Pi$-irreversible, alors pour $\Pi$ tout points initiale $x_0 \in E$
+
+\begin{equation}
+lim_{n->+\inf} ||K^n (x_0, \dot)\Pi||_{VT}=0
+\end{equation}
+
+VT: Variation Totale
+
+\section{Algorithme MCMC (MH)}
+\subsection{Convergence de MH}
+Rappel:
+Def: Etant donn\`e une loi instrumentale $q$, 
+i)generer un $i_k~q(y|x_k)$
+ii) poser
+
+\begin{equation}
+
+\end{equation} 
+avec proba $a=\rou(x_k,y_k)$, $x_k$ avec proba 1-a
+
+si 
+\begin{equation}
+\rou(x,y) = min\{1,\frac{p(y)}{p(x)}\frac{p(x|y)}{p(y|x)}\}
+\end{equation}
+
+proposition: 
+l'algorithme de MH (?) construit un noyeau de
+\begin{equation}
+K_{MH}(x,dz=q(z|x))\rou(x,z)dz+(1-x(x))\delta_x(dy)
+\end{equation}
+avec
+\begin{equation}
+\delta(x)=\int_E \rou(x,y)q(y|x)dy
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
