@@ -1,3 +1,6 @@
-\contentsline {chapter}{\numberline {1}Introduction}{5}
-\contentsline {chapter}{\numberline {2}Inference Bay\'esienne}{7}
-\contentsline {section}{\numberline {2.1}Inference statistique et th\'eorie de la d\'ecision}{7}
+\contentsline {section}{\numberline {0}Introduction}{2}
+\contentsline {section}{\numberline {1}Inference Bay\'esienne}{2}
+\contentsline {subsection}{\numberline {1.1}Inference statistique et th\'eorie de la d\'ecision}{2}
+\contentsline {subsection}{\numberline {1.2}Methode de construction (?)}{3}
+\contentsline {subsubsection}{\numberline {1.2.1}(?) d'une regle optimal dans une sous-classe}{3}
+\contentsline {subsubsection}{\numberline {1.2.2}Optimisation d'un critere}{3}

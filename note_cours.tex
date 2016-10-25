@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass{article}
 \linespread{1.5}
 
 \usepackage{amsmath}
@@ -6,15 +6,17 @@
 \usepackage{mathrsfs}
 
 \title{Statistique Bay\'esienne}
-
+\setcounter{section}{-1}
 
 \begin{document}
 \maketitle
 
 \tableofcontents
-\chapter{Introduction}
-\chapter{Inference Bay\'esienne}
-\section{Inference statistique et th\'eorie de la d\'ecision}
+\pagebreak
+
+\section{Introduction}
+\section{Inference Bay\'esienne}
+\subsection{Inference statistique et th\'eorie de la d\'ecision}
 def: Modele statistique
 
 \begin{equation}
@@ -66,5 +68,31 @@ value absolue $C^1$, pertes 0-1 (tests d'hypothese)
 (?) pertes joules ou l'entropie
 
 (?) en euros
+
+def: la performance de la regle de decision $\delta$ est quanti-free a (?), definie comme la perte moyenne
+
+\begin{equation}
+	R(\theta,S) = E_{y\in \mathscr{P}_\theta} \{L(\theta, \delta(y))\} = \int_Y L(\theta,\delta(y))d P_\theta(y)=\int_y L(\theta,\delta(y))P_\theta(y)dy
+\end{equation}
+
+\subsection{Methode de construction (?)}
+\subsubsection{(?) d'une regle optimal dans une sous-classe}
+
+objectif: construire un $\delta^*$ dans une classe de regles de decision $\tau$ telle que $\forall \delta \in \tau$
+
+\begin{equation}
+	R(\theta,\delta^*)<=R(\theta,\delta)
+\end{equation}
+pour tout $\theta\in\Theta$
+
+Cas particulier important
+
+-> recherche d'estimateurs sans biais de variance minimale
+
+-> de tels elements optimale (?), dans le cadre des (?) (voir cours 1A)
+
+\subsubsection{Optimisation d'un critere}
+
+-> recherche une estimateur avec minimiseur ou maximiseur d'un critere
 
 \end{document}
